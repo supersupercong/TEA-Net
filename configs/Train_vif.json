@@ -1,0 +1,111 @@
+{
+    "name": "vif",
+    "experim_name": "Experiments/VIF",
+    "net": "MambaFusion",
+    "loss": "Loss_Vif",
+    "tags": "EXP13_2stage_cv",
+    "train_dataset": "MSRS",
+    "train_batch_size": 1,
+    "num_workers": 16,
+    "scale":1,
+    "save_path":"./save_images/VIF/MSRS_test/",
+    "current_epoch":40,
+    
+    "MambaFusion":{
+        "num_channels_ir":1,
+        "num_channels_vis":1,
+        "base_filter":32
+    },
+
+    "optimizer": {
+        "type": "ADAM",
+        "args":{
+            "lr": 2e-4,
+            "weight_decay":0,
+            "momentum": 0.999
+        },
+        "sheduler":"CosineAnnealingLR",
+        "sheduler_set":{
+            "step_size": 1000,
+            "gamma": 0.5
+        }
+    },
+
+    "trainer": {
+        "total_epochs": 120,
+        "epoch_gap": 40,
+        "test_freq": 1,
+        "save_top_k": 50
+    },
+
+
+    "RS": {
+        "data_dir": {
+            "train_dir":{
+                "data_dir_A":"./data/VIF/roadscene/train/ir",
+                "data_dir_B":"./data/VIF/roadscene/train/vi"
+                        },
+            "val_dir":{
+                "data_dir_A":"./data/VIF/roadscene/test/ir",
+                "data_dir_B":"./data/VIF/roadscene/test/vi"
+            },
+            "test_dir":{
+                "data_dir_ir":"./data/MSRS_main/test/ir",
+                "data_dir_vis":"./data/MSRS_main/test/vi"
+            }
+                    },
+        "max_value": 255.0,
+        "patch_size" : 128,
+        "data_augmentation":true
+    },
+
+
+    "M3FD": {
+        "data_dir": {
+            "train_dir":{
+                "data_dir_A":"./data/VIF/M3FD/train/ir",
+                "data_dir_B":"./data/VIF/M3FD/train/vi"
+                        },
+            "val_dir":{
+                "data_dir_A":"./data/VIF/M3FD/test/ir",
+                "data_dir_B":"./data/VIF/M3FD/test/vi"
+            },
+            "det_dir":{
+                "data_dir_A":"./data/VIF/M3FD_Detection/Ir",
+                "data_dir_B":"./data/VIF/M3FD_Detection/Vis"
+            },
+            "test_dir":{
+                "data_dir_ir":"./data/MSRS_main/test/ir",
+                "data_dir_vis":"./data/MSRS_main/test/vi"
+            }
+                    },
+        "max_value": 255.0,
+        "patch_size" : 256,
+        "data_augmentation":true
+    },
+
+
+    "MSRS": {
+        "data_dir": {
+            "train_dir":{
+                "data_dir_A":"./data/VIF/MSRS-main/train/ir",
+                "data_dir_B":"./data/VIF/MSRS-main/train/vi"
+                        },
+            "val_dir":{
+                "data_dir_A":"./data/VIF/MSRS-main/test/ir",
+                "data_dir_B":"./data/VIF/MSRS-main/test/vi"
+            },
+            "test_dir":{
+                "data_dir_ir":"./data/MSRS_main/test/ir",
+                "data_dir_vis":"./data/MSRS_main/test/vi"
+            },
+            "det_dir":{
+                "data_dir_A":"./data/VIF/MSRS-main/detection/ir",
+                "data_dir_B":"./data/VIF/MSRS-main/detection/vi"
+            }
+                    },
+        "max_value": 255.0,
+        "patch_size" : 256,
+        "data_augmentation":true
+    }
+}

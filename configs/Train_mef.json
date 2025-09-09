@@ -1,0 +1,50 @@
+{
+    "name": "vif",
+    "experim_name": "Experiments/VIF",
+    "net": "MambaFusion",
+    "loss": "Loss_Vif",
+    "tags": "EXP0",
+    "train_dataset": "LLVIP",
+    "train_batch_size": 1,
+    "num_workers": 16,
+    "scale":1,
+    "save_path":"./save_images/",
+    
+    "MambaFusion":{
+        "num_channels1":1,
+        "num_channels2":1,
+        "base_filter":32
+    },
+
+    "optimizer": {
+        "type": "ADAM",
+        "args":{
+            "lr": 2e-4,
+            "weight_decay":0,
+            "momentum": 0.999
+        },
+        "sheduler":"CosineAnnealingLR",
+        "sheduler_set":{
+            "step_size": 1000,
+            "gamma": 0.5
+        }
+    },
+
+    "trainer": {
+        "total_epochs": 10000,
+        "test_freq": 20,
+        "save_top_k": 100
+    },
+
+
+    "LLVIP": {
+        "data_dir": {"train_dir":{"data_dir_A":"./data/LLVIP_with_downsample_infrared/infrared/train" ,
+                                "data_dir_B":"./data/LLVIP_with_downsample_infrared/visible/train"
+        }
+                    },
+        "max_value": 255.0,
+        "patch_size" : 256,
+        "data_augmentation":true
+     
+    }
+}
