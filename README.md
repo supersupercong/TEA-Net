@@ -100,12 +100,12 @@ python Metric_Python/eval_one_method_ct.py
 
 #### MRI-PET
 ```
-python Metric_Python/eval_one_method_ct.py
+python Metric_Python/eval_one_method_pet.py
 ```
 
 #### MRI-SPECT
 ```
-python Metric_Python/eval_one_method_ct.py
+python Metric_Python/eval_one_method_spect.py
 ```
 The results will be saved in the folder of [Metric](Metric) 
 
