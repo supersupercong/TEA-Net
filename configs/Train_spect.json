@@ -1,0 +1,56 @@
+{
+    "name": "med",
+    "experim_name": "Experiments/MED",
+    "net": "highorder_nips",
+    "loss": "Loss_Med",
+    "tags": "EXP0",
+    "train_dataset": "SPECT",
+    "train_batch_size": 1,
+    "num_workers": 16,
+    "scale":1,
+    "save_path":"./save_images_spect/",
+    
+    "highorder_nips":{
+        "num_channels1":1,
+        "num_channels2":1,
+        "base_filter":32
+    },
+
+    "optimizer": {
+        "type": "ADAM",
+        "args":{
+            "lr": 2e-4,
+            "weight_decay":0,
+            "momentum": 0.999
+        },
+        "sheduler":"CosineAnnealingLR",
+        "sheduler_set":{
+            "step_size": 100,
+            "gamma": 0.5
+        }
+    },
+
+    "trainer": {
+        "total_epochs": 200,
+        "test_freq": 20,
+        "save_top_k": 100
+    },
+
+
+    "SPECT": {
+        "data_dir": {
+            "train_dir":{
+                "data_dir_A":"/data6/weiwang/medical/data/fusion_data/Med/Havard-Medical-Image-Fusion-Datasets-main/MyDatasets/SPECT-MRI/train/SPECT" ,
+                "data_dir_B":"/data6/weiwang/medical/data/fusion_data/Med/Havard-Medical-Image-Fusion-Datasets-main/MyDatasets/SPECT-MRI/train/MRI"
+        },
+            "val_dir":{
+                "data_dir_A":"/data6/weiwang/medical/data/fusion_data/Med/Havard-Medical-Image-Fusion-Datasets-main/MyDatasets/SPECT-MRI/test/SPECT" ,
+                "data_dir_B":"/data6/weiwang/medical/data/fusion_data/Med/Havard-Medical-Image-Fusion-Datasets-main/MyDatasets/SPECT-MRI/test/MRI"
+            }
+                    },
+        "max_value": 255.0,
+        "patch_size" : 256,
+        "data_augmentation":true
+     
+    }
+}
